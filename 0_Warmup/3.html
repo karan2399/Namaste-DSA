@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warmup 3</title>
+  </head>
+  <body>
+    <script>
+      // Write a function that returns the largest number in an array.
+      let arr = [2, -9, 17, 0, 1, -10, -4, 8, 84];
+      function findLargest(arr) {
+        // We set max number to -Infinity because it is the smallest number and every number in the array will be greater than that.
+        // If we use -1 as max, and if the array elements are [-4,-5,-3], then the answer will be -1, which is incorrect.
+        // We can also set arr[0] as max which would also be a correct approach.
+        let max = -Infinity;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] > max) {
+            max = arr[i];
+          }
+        }
+        return max;
+      }
+      console.log(findLargest(arr));
+
+      // Write a function that returns the smallest number in an array.
+      function findSmallest(arr) {
+        let min = Infinity;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] < min) {
+            min = arr[i];
+          }
+        }
+        return min;
+      }
+      console.log(findSmallest(arr));
+    </script>
+  </body>
+</html>

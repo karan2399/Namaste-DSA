@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+set -e
+
+python3 <<'PY'
+from pathlib import Path
+
+root = Path.cwd()
+readme = root / "README.md"
+
+excluded_dirs = {".git", ".githooks", "node_modules"}
+
+def natural_key(value):
+    import re
+    return [int(part) if part.isdigit() else part.lower() for part in re.split(r"(\d+)", value)]
+
+def module_label(name):
+    for prefix in ("0_", "1_", "2_", "3_", "4_", "5_", "6_", "7_", "8_", "9_", "10_"):
+        if name.startswith(prefix):
+            name = name[len(prefix):]
+            break
+    return name.replace("_", " ").replace("&_", "& ").replace("_&_", " & ")
+
+top_entries = sorted(
+    (item for item in root.iterdir() if item.name not in excluded_dirs),
+    key=lambda item: natural_key(item.name),
+)
+
+tree_lines = []
+for item in top_entries:
+    if item.is_dir():
+        tree_lines.append(f"{item.name}/")
+        for child in sorted(item.rglob("*"), key=lambda path: natural_key(str(path.relative_to(root)))):
+            if any(part in excluded_dirs for part in child.parts):
+                continue
+            relative = child.relative_to(item)
+            depth = len(relative.parts)
+            if child.is_dir():
+                tree_lines.append(f"{'  ' * depth}{child.name}/")
+            elif child.is_file():
+                tree_lines.append(f"{'  ' * depth}{child.name}")
+    elif item.is_file():
+        tree_lines.append(item.name)
+
+module_rows = []
+for item in sorted((entry for entry in top_entries if entry.is_dir()), key=lambda entry: natural_key(entry.name)):
+    files = sorted(
+        (
+            child for child in item.rglob("*")
+            if child.is_file() and not any(part in excluded_dirs for part in child.relative_to(root).parts)
+        ),
+        key=lambda path: natural_key(str(path.relative_to(root))),
+    )
+    if files:
+        status = "In progress"
+        file_links = ", ".join(
+            f"[{child.relative_to(item).as_posix()}]({item.name}/{child.relative_to(item).as_posix()})"
+            for child in files
+        )
+    else:
+        status = "Not started"
+        file_links = "-"
+    module_rows.append(
+        f"| [{module_label(item.name)}]({item.name}/) | {status} | {file_links} |"
+    )
+
+text = readme.read_text(encoding="utf-8")
+start_marker = "<!-- project-index:start -->"
+end_marker = "<!-- project-index:end -->"
+if start_marker not in text or end_marker not in text:
+    raise SystemExit("README.md is missing project-index markers")
+
+generated = f"""{start_marker}
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [Module Index](#module-index)
+- [Disclaimer](#disclaimer)
+
+## Project Structure
+
+```text
+{chr(10).join(tree_lines)}
+```
+
+## Module Index
+
+| Module | Status | Files |
+| --- | --- | --- |
+{chr(10).join(module_rows)}
+
+{end_marker}"""
+
+before, remainder = text.split(start_marker, 1)
+_, after = remainder.split(end_marker, 1)
+readme.write_text(before + generated + after, encoding="utf-8")
+PY
+
+git add README.md .githooks/pre-commit
