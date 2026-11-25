@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count digits in a num</title>
+</head>
+
+<body>
+
+    <script>
+        function countDigits(num) {
+            num = Math.abs(num)
+            if (num == 0) {
+                return 1;
+            }
+            let count = 0;
+
+            while (num > 0) {
+                num = Math.floor(num / 10);
+                count++
+            }
+            return count;
+        }
+        let num = -122;
+
+        let result = countDigits(num);
+        console.log(result);
+    </script>
+
+</body>
+
+</html>

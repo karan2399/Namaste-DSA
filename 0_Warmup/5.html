@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Patterns</title>
+</head>
+
+<body>
+    <script>
+        /*
+         * * * *
+         * * * *
+         * * * *
+         * * * *
+         */
+        function star1() {
+            for (let i = 0; i < 4; i++) {
+                let row = " ";
+                for (let j = 0; j < 4; j++) {
+                    row += "* ";
+                }
+                console.log(row);
+            }
+        }
+        //   star1();
+
+        /*
+         *
+         * *
+         * * *
+         * * * *
+         */
+        function star2() {
+            let n = 4;
+
+            for (let i = 0; i < n; i++) {
+                let row = "";
+                for (let j = 0; j <= i; j++) {
+                    row += "* ";
+                }
+                console.log(row);
+            }
+        }
+        //   star2();
+
+        /*
+      1 
+      1 2 
+      1 2 3 
+      1 2 3 4 
+      1 2 3 4 5 
+  
+      */
+
+        function star3() {
+            let n = 5;
+
+            for (let i = 1; i <= n; i++) {
+                let row = "";
+                for (let j = 1; j <= i; j++) {
+                    row = row + j + " ";
+                }
+                console.log(row);
+            }
+        }
+
+        //   star3();
+
+        /*
+       1 
+       2 2 
+       3 3 3 
+       4 4 4 4 
+       5 5 5 5 5 
+      */
+
+        function star4() {
+            let n = 5;
+
+            for (let i = 1; i <= n; i++) {
+                let row = "";
+                for (let j = 1; j <= i; j++) {
+                    row = row + i + " ";
+                }
+                console.log(row);
+            }
+        }
+
+        // star4();
+
+
+        /*
+        1 2 3 4 5 
+        1 2 3 4 
+        1 2 3 
+        1 2 
+        1 
+        */
+
+
+        function star5() {
+            let n = 5;
+
+            for (let i = 0; i < n; i++) {
+                let row = ""
+                for (let j = 0; j < n - i; j++) {
+                    row = row + (j + 1) + " "
+                }
+                console.log(row)
+            }
+        }
+
+        // star5();
+
+
+
+        /*
+      *
+     **
+    ***
+   ****
+  *****
+
+        */
+        function star6() {
+            let n = 5;
+
+            for (let i = 0; i < n; i++) {
+                let row = ""
+                for (let j = 0; j < n - i; j++) {
+                    row = row + " "
+                }
+                for (let k = 0; k <= i; k++) {
+                    row = row + "*"
+                }
+                console.log(row)
+            }
+        }
+
+        // star6();
+
+
+        /*
+        1 
+        1 0 
+        1 0 1 
+        1 0 1 0 
+        1 0 1 0 1 
+        1 0 1 0 1 0 
+        */
+
+        function star7() {
+            let n = 6;
+            for (let i = 0; i < n; i++) {
+                let row = ""
+                for (let j = 0; j <= i; j++) {
+                    if (j % 2 === 0) {
+                        row = row + 1 + " ";
+                    } else {
+                        row = row + 0 + " ";
+                    }
+                }
+                console.log(row)
+            }
+        }
+
+        // star7();
+
+        /*
+        1 
+        0 1 
+        0 1 0 
+        1 0 1 0 
+        1 0 1 0 1 
+        */
+
+        function star8() {
+            let n = 5;
+            let toggle = 1;
+            for (let i = 0; i < n; i++) {
+                let row = ""
+                for (let j = 0; j <= i; j++) {
+                    row = row + toggle + " ";
+                    if (toggle == 1) {
+                        toggle = 0;
+                    } else {
+                        toggle = 1;
+                    }
+                }
+
+                console.log(row)
+            }
+        }
+        star8();
+    </script>
+</body>
+
+</html>

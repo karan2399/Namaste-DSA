@@ -20,6 +20,8 @@ This repository includes clean JavaScript implementations, dry-run explanations,
   2.html
   3.html
   4.html
+  5.html
+  6_Count_Digits_In_an_Integer.html
 1_Arrays_Easy_Medium/
 2_Recursion_Easy_Medium/
 3_Searching_Sorting_Easy_Medium/
@@ -37,7 +39,7 @@ README.md
 
 | Module | Status | Files |
 | --- | --- | --- |
-| [Warmup](0_Warmup/) | In progress | [1.html](0_Warmup/1.html), [2.html](0_Warmup/2.html), [3.html](0_Warmup/3.html), [4.html](0_Warmup/4.html) |
+| [Warmup](0_Warmup/) | In progress | [1.html](0_Warmup/1.html), [2.html](0_Warmup/2.html), [3.html](0_Warmup/3.html), [4.html](0_Warmup/4.html), [5.html](0_Warmup/5.html), [6_Count_Digits_In_an_Integer.html](0_Warmup/6_Count_Digits_In_an_Integer.html) |
 | [Arrays Easy Medium](1_Arrays_Easy_Medium/) | Not started | - |
 | [Recursion Easy Medium](2_Recursion_Easy_Medium/) | Not started | - |
 | [Searching Sorting Easy Medium](3_Searching_Sorting_Easy_Medium/) | Not started | - |
